@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="MustBindYourQQ:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MustBindYourQQ_jar</output-path>
+    <root id="archive" name="MustBindYourQQ.jar">
+      <element id="module-output" name="MustBindYourQQ" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/gson-2.7.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
