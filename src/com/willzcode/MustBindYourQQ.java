@@ -41,11 +41,11 @@ public class MustBindYourQQ extends JavaPlugin implements Listener {
             String name = args[0];
             String qq = args[1];
             if (!isNumeric(qq)) {
-                sender.sendMessage("请输入正确的qq！");
+                sender.sendMessage("§6请输入正确的qq！");
                 return true;
             }
             setBindedQQ(name, qq);
-            sender.sendMessage("绑定成功");
+            sender.sendMessage("§6绑定成功");
             return true;
         }
 
@@ -53,29 +53,29 @@ public class MustBindYourQQ extends JavaPlugin implements Listener {
         if (args.length > 0) {
             String qq = args[0];
             if (!isNumeric(qq)) {
-                sender.sendMessage("请输入正确的qq！");
+                sender.sendMessage("§6请输入正确的qq！");
                 return true;
             }
             String name = ((Player)sender).getName();
             if (!getBindedQQ(name).isEmpty()) {
-                sender.sendMessage("你已绑定qq，暂时不支持重新绑定！");
+                sender.sendMessage("§6你已绑定qq，暂时不支持重新绑定！");
                 return true;
             }
 
             if (isQQBinded(qq)) {
-                sender.sendMessage("这个qq已绑定其他账号，不能再申请绑定了！");
+                sender.sendMessage("§6这个qq已绑定其他账号，不能再申请绑定了！");
                 return true;
             }
 
             if (checkMember(qq)) {
                 pendingMap.put(name, qq);
-                sender.sendMessage("已发送请求，请在群里进行验证!");
+                sender.sendMessage("§6已发送请求，请在群里进行验证!");
                 sendToGroup("[CQ:at,qq%3d" + qq + "]您的游戏账号["+name+"]在服务器中申请了绑定QQ，请在群里回复下面的文字来绑定：%26bind "+name);
             } else {
-                sender.sendMessage("你的qq不在群里，请先加群："+groupid+"!");
+                sender.sendMessage("§6你的qq不在群里，请先加群："+groupid+"!");
             }
         } else {
-            sender.sendMessage("绑定指令用法：/bind <QQ号>\n如/bind 10086");
+            sender.sendMessage("§6绑定指令用法：/bind <QQ号>\n如/bind 10086");
         }
         return true;
     }
@@ -86,7 +86,8 @@ public class MustBindYourQQ extends JavaPlugin implements Listener {
         if (command.startsWith("pro")) {
             String name = event.getPlayer().getName();
             if (!isPlayerBinded(name)) {
-                event.setCancelled(true);
+                event.getPlayer().sendMessage("§6暂未绑定qq，不能使用这个指令");
+                event.setMessage("/bind");
             }
         }
     }
@@ -174,7 +175,7 @@ public class MustBindYourQQ extends JavaPlugin implements Listener {
                             setBindedQQ(name, qq);
                             pendingMap.remove(name);
                             sendToGroup("[CQ:at,qq%3d" + qq + "]绑定成功，请不要随意退群哦！");
-                            Bukkit.getPlayer(name).sendMessage("绑定成功，请不要随意退群哦！");
+                            Bukkit.getPlayer(name).sendMessage("§6绑定成功，请不要随意退群哦！");
                             if(lockPlayer.contains(Bukkit.getPlayer(name).getUniqueId()))
                                 lockPlayer.remove(Bukkit.getPlayer(name).getUniqueId());
                         } else {
